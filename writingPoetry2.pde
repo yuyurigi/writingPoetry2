@@ -158,7 +158,7 @@ void keyPressed() {
 
 void lightSwitch() {
   if (frameCount%8==0) {
-    int space = int(random(50));
+    int space = int(random(40));
     if (space < 1) {
       bLight = false;
     } else {

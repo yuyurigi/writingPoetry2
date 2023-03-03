@@ -3,6 +3,7 @@ import java.util.Calendar;
 
 RShape[] grp;
 RShape[] emo;
+int eyeMode = 1; //0:目の光あり 1:目の光なし
 int currentLine = 0;
 int time = 0;
 int interval = 1000; //１文書く間隔（数値が大きいほど遅くなる）
@@ -10,6 +11,7 @@ int textSpace = 65; //行間
 int textWidth = 35; //文字の大きさ
 int bodyFrame = 0;
 int eyeFrame = 0;
+int countNum = 0;
 int wink, indentNum, currentIndent;
 int mode = 0; //0:テキストを書く 1:改行 2:にらむ 3:文字を消す
 int prevMode; //１フレーム前のmodeの値
@@ -26,6 +28,7 @@ PImage[] eyes = new PImage[3];
 PImage[] eyesB = new PImage[3];
 boolean bEye = false;
 boolean prevbEye; //１フレーム前のbEyeの値
+boolean bL = true;
 boolean bLight = true;
 ArrayList<Text> texts = new ArrayList<Text>();
 ArrayList<RoundRect> rrect = new ArrayList<RoundRect>();
@@ -56,15 +59,28 @@ void setup() {
     String imageName = "ani-" + nf(i, 1) + "b.png";
     imagesB[i] = loadImage(imageName);
   }
-  //目
-  for (int i = 0; i < eyes.length; i++) {
-    String imageName = "eye-" + nf(i, 1) + ".png";
-    eyes[i] = loadImage(imageName);
-  }
-  //目（暗）
-  for (int i = 0; i < eyesB.length; i++) {
-    String imageName = "eye-" + nf(i, 1) + "b.png";
-    eyesB[i] = loadImage(imageName);
+  if (eyeMode == 0) {
+    //目
+    for (int i = 0; i < eyes.length; i++) {
+      String imageName = "eye-" + nf(i, 1) + ".png";
+      eyes[i] = loadImage(imageName);
+    }
+    //目（暗）
+    for (int i = 0; i < eyesB.length; i++) {
+      String imageName = "eye-" + nf(i, 1) + "b.png";
+      eyesB[i] = loadImage(imageName);
+    }
+  } else if (eyeMode == 1) {
+    //目
+    for (int i = 0; i < eyes.length; i++) {
+      String imageName = "data2/eye-" + nf(i, 1) + ".png";
+      eyes[i] = loadImage(imageName);
+    }
+    //目（暗）
+    for (int i = 0; i < eyesB.length; i++) {
+      String imageName = "data2/eye-" + nf(i, 1) + "b.png";
+      eyesB[i] = loadImage(imageName);
+    }
   }
 
   //画像の位置
